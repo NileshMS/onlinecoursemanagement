@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+ {% block content %}
+     {% load crispy_forms_tags %}
+     <div class="container mx-auto">
+         <form method="post">
+             {% csrf_token %}
+             {{ form|crispy }}
+             <button class="btn btn-outline-info" type="submit">Log-in</button>
+             <p class="my-2"><small class="small">New Student?<a class='mx-2' href="{% url 'signup' %}">Sign-Up</a></small></p>
+         </form>
+     </div>
+ {% endblock %}

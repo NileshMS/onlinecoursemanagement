@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-header"
+             style="color: #f58c83; border-top: #f58c83 5px solid; border-bottom: #f5c1bd 2px solid">
+            <h4>You have been logged out</h4>
+        </div>
+        <div class="card-body">
+            <small class="text-muted">Already have an account?<a href="{% url 'login' %}"
+                                                                 class="ml-2">Sign-In</a></small>
+        </div>
+    </div>
+{% endblock %}
+
+

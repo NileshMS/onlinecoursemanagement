@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div class="container col-lg-4 mx-auto">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">list of courses</li>
+                <li class="breadcrumb-item"><a href="{% url 'addcourse' %}">Add New Course</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'logout' %}">Logout</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="container">
+        <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Course</th>
+                <th>Faculty</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Fee</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+        <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.course }}</td>
+                    <td>{{ course.faculty }}</td>
+                    <td>{{ course.date }}</td>
+                    <td>{{ course.time }}</td>
+                    <td>{{ course.duration }}</td>
+                    <td>{{ course.fee }}</td>
+                    <td><a class="btn btn-warning btn-sm" href="{% url 'tutionadmin:update' pk=course.courseid %}">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="{% url 'tutionadmin:delete' pk=course.courseid %}" >Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {#        <p>add new course</p>#}
+    {#        <p>list of courses</p>#}
+    {#        <p>list of Students</p>#}
+    {#        <p>upadate course</p>#}
+    {#        <p>delete course</p>#}
+    {#        <p>logout</p>#}
+
+{% endblock %}
