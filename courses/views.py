@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Course, ProfileModel, CustomUserModel, EnroledCourseModel
 # Create your views here.
 from .forms import CustomUserCreationForm, AddCourseForm
@@ -15,8 +16,12 @@ class SignUpVeiw(CreateView):
 class CoursesListView(ListView):
     model = Course
     template_name = 'home.html'
-    paginate_by = 3
-    context_object_name = 'courses_list'
+    context_object_name = 'courses'
+
+# def course_list(request):
+#     course = Course.objects.all()
+#     print(course)
+#     return render(request, 'home.html', {'courses': course})
 
 
 class CourseDetailView(DetailView):
@@ -34,25 +39,26 @@ class CreateNewCourse(CreateView):
     model = Course
     form_class = AddCourseForm
     template_name = 'courses/newcourse.html'
-    success_url = 'adminhome'
+    success_url = reverse_lazy('course_list_view')
 
-# class CourseList(ListView):
-#     model = Course
-#     template_name = 'courses/course_list.html'
 
-def course_list_view(request):
-    courses = Course.objects.all()
-    print(courses)
-    return render(request, 'courses/course_list.html', {'objects_list': courses})
+class CourseList(ListView):
+    model = Course
+    template_name = 'courses/course_list.html'
+
 
 class CourseUpdate(UpdateView):
     model = Course
     form_class = AddCourseForm
     template_name = 'updatecourse.html'
-    redirect_url = reverse_lazy('adminhome')
+    success_url = reverse_lazy('course_list_view')
 
 
-class CourseDelete(DeleteView):
+class CourseDelete(LoginRequiredMixin, DeleteView):
     model = Course
     template_name = 'coursedelete.html'
-    redirect_url = reverse_lazy('adminhome')
+    success_url = reverse_lazy('course_list_view')
+
+class ProfileView(ListView):
+    model = ProfileModel
+    template_name = 'profile.html'

@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
- {% block content %}
-     {% load crispy_forms_tags %}
-     <div class="container col-lg-4 mx-auto">
-         <form method="post">
-             {% csrf_token %}
-             {{ form|crispy }}
-             <button class="btn btn-outline-info" type="submit">Submit</button>
-         </form>
-     </div>
- {% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <div class="container col-lg-4 mx-auto">
+                <h3></h3>
+                <form class="mb-4" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="text-center">
+                        <button class="btn btn-outline-info" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <h3>Not allowed to access this page</h3>
+        {% endif %}
+    {% endif %}
+{% endblock %}

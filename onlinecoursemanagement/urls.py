@@ -22,15 +22,15 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('course_list/', views.CoursesListView.as_view(), name='course_list'),
-
+    # path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.CoursesListView.as_view(), name='home'),
+    # path('', views.course_list, name='home'),
     # --------------------admin course create,read, update, delete-----------------
     path('adminhome/', views.AdminHome.as_view(), name='adminhome'),
     path('newcourse/', views.CreateNewCourse.as_view(), name='newcourse'),
-    # path('courselist/', views.CourseList.as_view(), name='courselist'),
-    path('courselist/', views.course_list_view, name='course_list_view'),
-    path('updatecourse/<int:pk>/', views.CourseUpdate.as_view(), name='courseupdate'),
+    path('courselist/', views.CourseList.as_view(), name='course_list_view'),
+    # path('courselist/', views.course_list_view, name='course_list_view'),
+    path('courseupdate/<int:pk>/', views.CourseUpdate.as_view(), name='courseupdate'),
     path('deletecourse/<int:pk>/', views.CourseDelete.as_view(), name='coursedelete'),
 
     # -------------------signup, login, logout-------------------
@@ -42,4 +42,6 @@ urlpatterns = [
     path('change_password/',auth_views.PasswordChangeView.as_view(template_name='change_password.html'), name='change_password'),
     path('change_password_done/',auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'), name='change_password_done'),
 
+    # -------------------Profile----------------------------
+    path('profile/',views.ProfileView.as_view(), name='profile'),
 ]

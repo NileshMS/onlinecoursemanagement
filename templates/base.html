@@ -28,30 +28,53 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-                {% if user.is_authenticated %}
-                    {% if user.is_staff %}
-                        <li class="nav-item">
-                        <a class="nav-link" href="{% url 'adminhome' %}" tabindex="-1" aria-disabled="true">Admin</a>
-                    {% endif %}
-                    <li><h4>hi, {{ user.username }}</h4></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" tabindex="-1"
-                                            aria-disabled="true">Log-Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" tabindex="-1"
-                                            aria-disabled="true">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}" tabindex="-1"
-                                            aria-disabled="true">Sign Up</a>
-                    </li>
-                {% endif %}
             </ul>
-{#            <form class="form-inline my-2 my-lg-0">#}
-{#                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-{#            </form>#}
+            <div class="ml-auto mr-1">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adminhome' %}" tabindex="-1"
+                               aria-disabled="true">Admin</a>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <span class="btn btn-info navbar-text">
+                            Hi {{ user.username }}
+                        </span>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
+<div class="container" style="padding-top: 70px">
+    <div class="row">
+        <div class="col-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% block content %}
 
 {% endblock %}

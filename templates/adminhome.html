@@ -1,52 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container col-lg-4 mx-auto">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Welcome Admin</li>
-                <li class="breadcrumb-item"><a href="{% url 'newcourse' %}">Add New Course</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'adminhome/course_list_view' %}">Courses List</a></li>
-            </ol>
-        </nav>
-    </div>
-    {% block courselist %}
-
-
-    {% endblock %}
-{##}
-{#    <div class="container">#}
-{#        <table class="table table-striped">#}
-{#            <thead class="thead-light">#}
-{#            <tr>#}
-{#                <th>Course</th>#}
-{#                <th>Faculty</th>#}
-{#                <th>Date</th>#}
-{#                <th>Time</th>#}
-{#                <th>Duration</th>#}
-{#                <th>Fee</th>#}
-{#                <th>Update</th>#}
-{#                <th>Delete</th>#}
-{#            </tr>#}
-{#            </thead>#}
-{#            <tbody>#}
-{#            <tr>#}
-{#                <td><h4>welcome</h4></td>#}
-{#            </tr>#}
-{#            {% for course in courses_list %}#}
-{#                <tr>#}
-{#                    <td>{{ course.course }}</td>#}
-{#                    <td>{{ course.faculty }}</td>#}
-{#                    <td>{{ course.date }}</td>#}
-{#                    <td>{{ course.time }}</td>#}
-{#                    <td>{{ course.duration }}</td>#}
-{#                    <td>{{ course.fee }}</td>#}
-{#                    <td><a class="btn btn-warning btn-sm" href="{% url 'update' pk=course.courseid %}">Update</a></td>#}
-{#                    <td><a class="btn btn-danger btn-sm" href="{% url 'delete' pk=course.courseid %}">Delete</a></td>#}
-{#                </tr>#}
-{#            {% endfor %}#}
-{#            </tbody>#}
-{#        </table>#}
-{#    </div>#}
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <div class="container col-lg-4 mx-auto">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Welcome Admin</li>
+                        <li class="breadcrumb-item"><a href="{% url 'newcourse' %}">Add New Course</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'course_list_view' %}">Courses List</a></li>
+                    </ol>
+                </nav>
+            </div>
+        {% else %}
+            <h3>Not allowed to access this page</h3>
+        {% endif %}
+    {% endif %}
+    {##}
+    {#    <div class="container">#}
+    {#        <table class="table table-striped">#}
+    {#            <thead class="thead-light">#}
+    {#            <tr>#}
+    {#                <th>Course</th>#}
+    {#                <th>Faculty</th>#}
+    {#                <th>Date</th>#}
+    {#                <th>Time</th>#}
+    {#                <th>Duration</th>#}
+    {#                <th>Fee</th>#}
+    {#                <th>Update</th>#}
+    {#                <th>Delete</th>#}
+    {#            </tr>#}
+    {#            </thead>#}
+    {#            <tbody>#}
+    {#            <tr>#}
+    {#                <td><h4>welcome</h4></td>#}
+    {#            </tr>#}
+    {#            {% for course in courses_list %}#}
+    {#                <tr>#}
+    {#                    <td>{{ course.course }}</td>#}
+    {#                    <td>{{ course.faculty }}</td>#}
+    {#                    <td>{{ course.date }}</td>#}
+    {#                    <td>{{ course.time }}</td>#}
+    {#                    <td>{{ course.duration }}</td>#}
+    {#                    <td>{{ course.fee }}</td>#}
+    {#                    <td><a class="btn btn-warning btn-sm" href="{% url 'update' pk=course.courseid %}">Update</a></td>#}
+    {#                    <td><a class="btn btn-danger btn-sm" href="{% url 'delete' pk=course.courseid %}">Delete</a></td>#}
+    {#                </tr>#}
+    {#            {% endfor %}#}
+    {#            </tbody>#}
+    {#        </table>#}
+    {#    </div>#}
     {#        <p>add new course</p>#}
     {#        <p>list of courses</p>#}
     {#        <p>list of Students</p>#}

@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
- {% block content %}
-     {% load crispy_forms_tags %}
-     <div class="container mx-auto">
-         <form method="post">
-             {% csrf_token %}
-             {{ form|crispy }}
-             <button class="btn btn-outline-info" type="submit">Add Course</button>
-         </form>
-     </div>
- {% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <div class="container col-lg-4 mx-auto">
+                <div style="border: 2px solid cornflowerblue; border-radius:  10px">
+                    <div class="container my-2">
+                        <h3 class="text-success" style="text-align: center">Register a New Course</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="text-center">
+                                <button class="btn btn-outline-info " type="submit">Add Course</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h3>Not allowed to access this page</h3>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
