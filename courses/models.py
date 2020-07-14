@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here
 class CustomUserModel(AbstractUser):
     phone = models.PositiveIntegerField(unique=True)
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['phone']
 
     def __str__(self):
         return self.username
@@ -32,5 +34,5 @@ class Course(models.Model):
 
 
 class EnroledCourseModel(models.Model):
-    course_profile = models.ManyToManyField(Course, on_delete=models.CASCADE)
+    course_profile = models.ManyToManyField(Course)
     student = models.OneToOneField(CustomUserModel, on_delete=models.CASCADE)

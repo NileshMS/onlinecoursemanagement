@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% load crispy_forms_tags %}
     <div class="container col-lg-4 mx-auto">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">list of courses</li>
-                <li class="breadcrumb-item"><a href="{% url 'addcourse' %}">Add New Course</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Welcome Admin</li>
+                <li class="breadcrumb-item"><a href="{% url 'newcourse' %}">Add New Course</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'courselist' %}">list of courses</a></li>
             </ol>
         </nav>
     </div>
 
     <div class="container">
         <table class="table table-striped">
-        <thead class="thead-light">
+            <thead class="thead-light">
             <tr>
                 <th>Course</th>
                 <th>Faculty</th>
@@ -25,8 +24,11 @@
                 <th>Delete</th>
             </tr>
             </thead>
-        <tbody>
-            {% for course in courses %}
+            <tbody>
+            <tr>
+                <td><h4>welcome</h4></td>
+            </tr>
+            {% for course in courses_list %}
                 <tr>
                     <td>{{ course.course }}</td>
                     <td>{{ course.faculty }}</td>
@@ -34,11 +36,11 @@
                     <td>{{ course.time }}</td>
                     <td>{{ course.duration }}</td>
                     <td>{{ course.fee }}</td>
-                    <td><a class="btn btn-warning btn-sm" href="{% url 'tutionadmin:update' pk=course.courseid %}">Update</a></td>
-                    <td><a class="btn btn-danger btn-sm" href="{% url 'tutionadmin:delete' pk=course.courseid %}" >Delete</a></td>
+                    <td><a class="btn btn-warning btn-sm" href="{% url 'update' pk=course.courseid %}">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="{% url 'delete' pk=course.courseid %}">Delete</a></td>
                 </tr>
             {% endfor %}
-        </tbody>
+            </tbody>
         </table>
     </div>
     {#        <p>add new course</p>#}

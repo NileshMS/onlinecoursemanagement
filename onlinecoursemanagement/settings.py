@@ -120,7 +120,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+TEMPLATE_DEBUG= True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
-AUTH_USER_MODEL= 'courses.CustomUser'
+AUTH_USER_MODEL= 'courses.CustomUserModel'
 
 LOGIN_REDIRECT_URL='home'
 

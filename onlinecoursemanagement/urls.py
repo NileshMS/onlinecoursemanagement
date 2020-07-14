@@ -18,28 +18,28 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from courses import views
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('course_list/',views.CoursesListView.as_view(template_name='home.html'), name='course_list'),
+    path('course_list/', views.CoursesListView.as_view(template_name='home.html'), name='course_list'),
 
-    #--------------------admin course create,read, update, delete-----------------
-    path('adminhome', views.AdminHome.as_view(), name='adminhome'),
-    path('newcourse', views.CreateNewCourse.as_view(), name='newcourse'),
-    path('courselist', views.CourseList.as_view(), name='courselist'),
-    path('updatecourse', views.CourseUpdate.as_view(), name='courseupdate'),
-    path('deletecourse', views.CourseDelete.as_view(), name='coursedelete'),
-
-
+    # --------------------admin course create,read, update, delete-----------------
+    path('adminhome/', views.AdminHome.as_view(), name='adminhome'),
+    path('newcourse/', views.CreateNewCourse.as_view(), name='newcourse'),
+    path('courselist/', views.CourseList.as_view(), name='courselist'),
+    # path('courselist/', views.course_list, name='course_list'),
+    path('updatecourse/<int:pk>/', views.CourseUpdate.as_view(), name='courseupdate'),
+    path('deletecourse/<int:pk>/', views.CourseDelete.as_view(), name='coursedelete'),
 
     # -------------------signup, login, logout-------------------
     path('signup/', views.SignUpVeiw.as_view(), name='signup'),
-    path('login/',LoginView.as_view(template_name='courses/login.html'), name='login'),
-    path('logout/',LogoutView.as_view(template_name='courses/logout.html'), name='logout'),
+    path('login/', LoginView.as_view(template_name='courses/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='courses/logout.html'), name='logout'),
 
     # --------------Authentication-------------------------------
-
-
+    path('change_password/',auth_views.PasswordChangeView.as_view(template_name='change_password.html'), name='change_password'),
+    path('change_password_done/',auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'), name='change_password_done'),
 
 ]
