@@ -36,17 +36,14 @@ class CreateNewCourse(CreateView):
     template_name = 'courses/newcourse.html'
     success_url = 'adminhome'
 
+# class CourseList(ListView):
+#     model = Course
+#     template_name = 'courses/course_list.html'
 
-class CourseList(ListView):
-    model = Course
-    template_name = 'adminhome.html'
-    context_object_name = 'courses_list'
-
-# def course_list(request):
-#     courses = Course.objects.all()
-#     print(courses)
-#     return render(request, 'adminhome.html', {'courses_list': courses})
-
+def course_list_view(request):
+    courses = Course.objects.all()
+    print(courses)
+    return render(request, 'courses/course_list.html', {'objects_list': courses})
 
 class CourseUpdate(UpdateView):
     model = Course
