@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container col-lg-4 my-5">
+    <div class="container col-lg-8 my-5">
         <div class="card text-center">
-            <div class="card-header">
+            <div class="card-header" style="background-color: #f5c1bd">
                 <h2 class="text-success">{{ object.course }}</h2>
             </div>
             <div class="card-body">
@@ -10,10 +10,14 @@
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi assumenda
                     at delectus ducimus eos explicabo impedit ipsum, nobis odit, perferendis quaerat quo similique
                     voluptatibus!</p>
-                <a href="#" class="btn btn-primary">Enroll Now</a>
+                <button class="btn btn-info">{{ object.faculty }}</button>
+{#                <a href="{% url 'enroll' pk=object.courseid %}" class="btn btn-secondary">Enroll Now</a>#}
+                <button class="btn btn-info">{{ object.date }}</button>
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted" style="background-color: #f5c1bd">
+                <button class="btn btn-success">{{ object.duration }}</button>
                 <span>2 days ago</span>
+                <button class="btn btn-success">{{ object.fee }}</button>
             </div>
         </div>
     </div>

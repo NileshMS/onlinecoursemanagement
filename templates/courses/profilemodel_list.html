@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    {% load static %}
+    <div class="container">
+        <div class="jumbotron mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    {#            <img src="/media/profile_pics/computer-303129.png" height="50" width="50">#}
+                    <p class="text-secondary">{{ user.email }}</p>
+                    <p class="text-secondary">{{ course.course }}</p>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div>{{ form|crispy }}</div>
+{#                            <div>{{ p_form|crispy }}</div>#}
+                            <p class="small">select your courses here!!</p>
+                            <button type="submit" class="btn btn-outline-primary"
+                                    style="background-color: #f58c83; color: whitesmoke; border: #f58c83 " value="{{ user.id }}">Enroll
+                            </button>
+                            <a class="btn btn-secondary" href="{% url 'change_password' %}">Password change</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
