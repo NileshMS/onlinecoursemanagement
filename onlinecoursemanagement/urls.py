@@ -45,6 +45,6 @@ urlpatterns = [
     # -------------------Profile----------------------------
     path('profile/',views.ProfileView.as_view(), name='profile'),
     # path('enrolledcourses/<int:pk>/', views.EnrolledCourses.as_view(), name='enrolledcourses'),
-    # path('enrolledcourses/<int:pk>/', views.enroledcourse, name='enrolledcourses'),
-    path('enroll/', views.Enroll.as_view(), name='enroll'),
+    path('enrolledcourses/<int:pk>/', views.enroledcourse, name='enrolledcourses'),
+    path('enroll/<int:pk>/', views.Enroll.as_view(), name='enroll'),
 ]

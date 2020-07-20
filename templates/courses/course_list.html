@@ -23,6 +23,7 @@
                         <th>Fee</th>
                         <th>Update</th>
                         <th>Delete</th>
+                        <th>Check Enrolled Students</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,8 @@
                             </td>
                             <td><a class="btn btn-danger btn-sm" href="{% url 'coursedelete' pk=course.courseid %}">Delete</a>
                             </td>
+                            <td><a class="btn form-control btn-warning btn-sm"
+                                   href="{% url 'enrolledcourses' pk=course.courseid %}">Enrolled students</a></td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -47,12 +50,6 @@
                     </tbody>
                 </table>
             </div>
-            {#        <p>add new course</p>#}
-            {#        <p>list of courses</p>#}
-            {#        <p>list of Students</p>#}
-            {#        <p>upadate course</p>#}
-            {#        <p>delete course</p>#}
-            {#        <p>logout</p>#}
         {% else %}
             <h3>Not allowed to access this page</h3>
         {% endif %}

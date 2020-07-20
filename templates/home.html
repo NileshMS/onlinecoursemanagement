@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Special Offers On Early Enrollment</h5>
                     <p class="card-text">{{ course.content }}</p>
-                    <a href="{% url 'enroll' %}" class="btn btn-primary">Enroll Now</a>
+                    <a href="{% url 'enroll' pk=course.courseid %}" class="btn btn-primary">Enroll Now</a>
                     <a href="{% url 'coursedetail' pk=course.courseid %}" class="btn btn-success mx-4">Details</a>
                 </div>
                 <div class="card-footer text-muted" style="background-color: #f5c1bd">

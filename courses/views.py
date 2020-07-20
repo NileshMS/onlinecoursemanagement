@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-# Create your views he
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -92,6 +91,7 @@ class Enroll(LoginRequiredMixin, CreateView):
     form_class = EnrolModelForm
     template_name = 'courses/profilemodel_list.html'
     success_url = 'profile'
+    redirect_field_name = 'course_list_view'
 
 
 # class EnrolledCourses(LoginRequiredMixin, ListView):
@@ -99,8 +99,7 @@ class Enroll(LoginRequiredMixin, CreateView):
 #     template_name = 'adminhome.html'
 #     context_object_name = 'objects'
 
-def enroledcourse(request):
-    objects = EnroledCourseModel.objects.filter()
-    for x in objects:
-        print(x)
-    return render(request, 'adminhome.html', {'objects':objects} )
+def enroledcourse(request, pk):
+    query = Course.objects.get(courseid=pk)
+    students = query.enroledcoursemodel_set.all()
+    return render(request, 'adminhome.html', {'students': students, "course":query})

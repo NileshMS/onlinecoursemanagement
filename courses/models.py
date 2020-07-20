@@ -12,13 +12,7 @@ class CustomUserModel(AbstractUser):
         return self.username
 
 
-class ProfileModel(models.Model):
-    student_profile = models.OneToOneField(CustomUserModel, on_delete=models.CASCADE)
-    def __str__(self):
-        return f'{self.student_profile.username} Profile!!'
-
-
-class Course(models.Model): #publicatins
+class Course(models.Model):  # publicatins
     courseid = models.AutoField(primary_key=True)
     course = models.CharField(max_length=60)
     faculty = models.CharField(max_length=50)
@@ -32,6 +26,13 @@ class Course(models.Model): #publicatins
         return self.course
 
 
-class EnroledCourseModel(models.Model): #article
-    course_profile = models.ManyToManyField(Course,  blank=True)
+class ProfileModel(models.Model):
+    student_profile = models.OneToOneField(CustomUserModel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.student_profile.username} Profile!!'
+
+
+class EnroledCourseModel(models.Model):  # article
+    course_profile = models.ManyToManyField(Course, blank=True)
     student = models.OneToOneField(CustomUserModel, on_delete=models.CASCADE)
